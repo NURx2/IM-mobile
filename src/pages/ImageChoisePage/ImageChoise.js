@@ -16,7 +16,6 @@ export default class ImageChoisePage extends React.Component {
     }
 
     FlipCamera = () => {
-        console.log("flip");
         if(this.state.type === "back")
             this.setState({
                 type: "front"
@@ -25,13 +24,58 @@ export default class ImageChoisePage extends React.Component {
             this.setState({
                type: "back"
             });
+    };
+
+    setCamera = ref => {
+        console.log("set ref");
+        this.camera = ref;
+    };
+
+    createFromData = (photo) => {
+        let data = new FormData();
+
+        data.append("photo",{
+            name: "photo",
+            uri: photo.uri.replace("file://", "")
+        });
+
+        return data;
     }
+
+    handlerUploadPhoto(photo) {
+        fetch(
+            "http://172.31.19.224:3228/image",{
+                method: "POST",
+                body: this.createFromData(photo)
+            }
+        ).then(
+            response => response.json()
+        ).then(
+            response => {
+                console.log(response);
+            }
+        ).catch(
+            error => console.log(error)
+        )
+    }
+
+    TakePhoto = async () => {
+        console.log("taking photo");
+        if(!this.camera)
+            return;
+
+        let photo = await this.camera.takePictureAsync();
+
+        console.log(photo);
+
+        this.handlerUploadPhoto(photo);
+    };
 
     render () {
         return (
             <View style={styles.Main}>
                 <View style={styles.CameraBlock}>
-                    <Camera type={this.state.type}/>
+                    <Camera type={this.state.type} setCamera={this.setCamera}/>
                 </View>
                 <View style={styles.BottomBlock}>
                     <View style={styles.BottomPanel}>
@@ -45,7 +89,9 @@ export default class ImageChoisePage extends React.Component {
                             </TouchableOpacity>
                         </View>
                         <View style={styles.TakeView}>
-                            <TouchableOpacity style={styles.TakeButton}>
+                            <TouchableOpacity
+                                onPress={this.TakePhoto}
+                                style={styles.TakeButton}>
                             </TouchableOpacity>
                         </View>
                         <View style={styles.GalleryView}>
