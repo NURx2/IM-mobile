@@ -40,13 +40,4 @@ export const styles = StyleSheet.create({
         backgroundColor: "red",
         borderRadius: 50,
     },
-    GalleryView: {
-        flex: 1,
-        justifyContent: "center"
-    },
-    GalleryImage: {
-        alignSelf: "center",
-        width: 40,
-        height: 40
-    }
 });
