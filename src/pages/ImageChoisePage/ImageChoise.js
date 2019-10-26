@@ -1,9 +1,11 @@
 import React from 'react'
-import {View, Button, TouchableOpacity, Image, Text} from 'react-native'
+import {View, TouchableOpacity, Image, Text} from 'react-native'
+import uploadPhoto from '../../utils/UploadPhoto/UploadPhoto'
 
 //Components
 import Camera from '../../components/Camera/Camera'
 import {styles} from "./ImageChoise.styles"
+import ImagePicker from '../../components/ImagePicker/ImagePicker'
 
 
 export default class ImageChoisePage extends React.Component {
@@ -14,6 +16,10 @@ export default class ImageChoisePage extends React.Component {
             type: "back"
         }
     }
+
+//===============================
+//============Camera=============
+//===============================
 
     FlipCamera = () => {
         if(this.state.type === "back")
@@ -31,34 +37,6 @@ export default class ImageChoisePage extends React.Component {
         this.camera = ref;
     };
 
-    createFromData = (photo) => {
-        let data = new FormData();
-
-        data.append("photo",{
-            name: "photo",
-            uri: photo.uri.replace("file://", "")
-        });
-
-        return data;
-    }
-
-    handlerUploadPhoto(photo) {
-        fetch(
-            "http://172.31.19.224:3228/image",{
-                method: "POST",
-                body: this.createFromData(photo)
-            }
-        ).then(
-            response => response.json()
-        ).then(
-            response => {
-                console.log(response);
-            }
-        ).catch(
-            error => console.log(error)
-        )
-    }
-
     TakePhoto = async () => {
         console.log("taking photo");
         if(!this.camera)
@@ -68,8 +46,10 @@ export default class ImageChoisePage extends React.Component {
 
         console.log(photo);
 
-        this.handlerUploadPhoto(photo);
+        uploadPhoto(photo);
     };
+
+//=============================
 
     render () {
         return (
@@ -94,14 +74,7 @@ export default class ImageChoisePage extends React.Component {
                                 style={styles.TakeButton}>
                             </TouchableOpacity>
                         </View>
-                        <View style={styles.GalleryView}>
-                            <TouchableOpacity>
-                                <Image
-                                    source={require("../../../static/gallery.png")}
-                                    style={styles.GalleryImage}
-                                />
-                            </TouchableOpacity>
-                        </View>
+                        <ImagePicker />
                     </View>
                 </View>
             </View>
