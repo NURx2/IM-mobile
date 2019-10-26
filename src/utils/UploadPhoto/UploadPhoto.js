@@ -10,17 +10,13 @@ formatData = (photo) => {
 }
 
 export default uploadPhoto = photo => {
-    fetch(
-        "http://172.31.19.224:3228/image",{
+    return fetch(
+        "http://192.168.50.11:3228/image",{
             method: "POST",
-            body: this.formatData(photo)
+            body: formatData(photo)
         }
     ).then(
         response => response.json()
-    ).then(
-        response => {
-            console.log(response);
-        }
     ).catch(
         error => console.log(error)
     )

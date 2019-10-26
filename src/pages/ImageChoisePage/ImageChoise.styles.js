@@ -4,6 +4,7 @@ export const styles = StyleSheet.create({
     Main: {
         flex: 1,
         flexDirection: "column",
+        backgroundColor: "#E5E5E5"
     },
     TopBlock: {
         backgroundColor: "#FFFFFF",
