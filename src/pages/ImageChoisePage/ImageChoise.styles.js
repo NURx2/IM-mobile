@@ -39,5 +39,10 @@ export const styles = StyleSheet.create({
         width: 100,
         backgroundColor: "red",
         borderRadius: 50,
+        shadowColor: "black",
+        shadowRadius: 5,
+        shadowOpacity: 0.5,
+        borderColor: "white",
+        borderWidth: 10
     },
 });
