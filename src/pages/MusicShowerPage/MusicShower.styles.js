@@ -1,16 +1,29 @@
-import {StyleSheet} from 'react-native'
+import {StyleSheet, Dimensions} from 'react-native'
+
+const { width, height } = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
     Main: {
         flex: 1,
         flexDirection: "column",
+        backgroundColor: "#E5E5E5",
+        alignItems: "center"
     },
     Header: {
         flex: 1,
-        backgroundColor: "black"
+        backgroundColor: "white",
+        width: width,
+        shadowColor: "black",
+        shadowRadius: 5,
+        shadowOpacity: 0.5,
+        justifyContent: "center"
+    },
+    HeaderText:{
+        fontSize: 22,
+        color: "black",
+        textAlign: "center"
     },
     Content: {
-        backgroundColor: "yellow",
         flex: 6,
     },
     Block: {
@@ -19,11 +32,18 @@ export const styles = StyleSheet.create({
         marginBottom: 20,
         marginTop: 20,
         height: 200,
-        
+        width: width * 0.8,
+        shadowColor: "black",
+        shadowRadius: 5,
+        shadowOpacity: 0.5,
+        alignSelf: "center"
     },
     ImageBlock: {
-        flex: 2,
+        flex: 3,
         backgroundColor: "green"
+    },
+    ScrollView: {
+        width: width,
     },
     TextBlock: {
         flex: 1,

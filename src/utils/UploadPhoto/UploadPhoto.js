@@ -11,7 +11,7 @@ formatData = (photo) => {
 
 export default uploadPhoto = photo => {
     return fetch(
-        "http://172.31.19.224:3228/image",{
+        "http://192.168.50.11:3228/image",{
             method: "POST",
             body: formatData(photo)
         }
