@@ -46,7 +46,14 @@ export default class ImageChoisePage extends React.Component {
 
         console.log(photo);
 
-        uploadPhoto(photo);
+        uploadPhoto(photo).then(
+            response => {
+                console.log(response);
+                this.props.navigation.navigate("Shower", {
+                    music: response
+                });
+            }
+        );
     };
 
 //=============================
@@ -74,7 +81,9 @@ export default class ImageChoisePage extends React.Component {
                                 style={styles.TakeButton}>
                             </TouchableOpacity>
                         </View>
-                        <ImagePicker />
+                        <ImagePicker
+                            navigation={this.props.navigation}
+                        />
                     </View>
                 </View>
             </View>
