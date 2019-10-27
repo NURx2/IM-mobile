@@ -1,4 +1,5 @@
 import React from 'react';
+import { Linking } from 'react-native'
 
 import {View, Text, ScrollView, Image, TouchableOpacity} from 'react-native'
 
@@ -25,9 +26,14 @@ export default class MusicShower extends React.Component {
                 <View style={styles.Content}>
                     <ScrollView style={styles.ScrollView} showsVerticalScrollIndicator={false}>
                     {
+                        this.state.music ?
                         this.state.music.map((row, index) => {
                             return (
-                                <View style={styles.Block} key={index}>
+                                <TouchableOpacity
+                                    style={styles.Block} 
+                                    key={index}
+                                    onPress={() => Linking.openURL(row.youtube_url)}
+                                >
                                     <View style={styles.ImageBlock}>
                                         <Image
                                             source={{uri: row.music_img}}
@@ -46,9 +52,14 @@ export default class MusicShower extends React.Component {
                                             </Text>
                                         </View>
                                     </View>
-                                </View>
-                            );}
-                        )
+                                </TouchableOpacity>
+                            );} 
+                        ) :
+                        <View style={styles.Block} >
+                            <Text style={styles.HeaderText}>
+                                Потеряна связь с сервером
+                            </Text>
+                        </View>
                     }
                     </ScrollView>
                 </View>

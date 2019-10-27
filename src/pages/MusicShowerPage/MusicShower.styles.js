@@ -40,7 +40,7 @@ export const styles = StyleSheet.create({
     },
     ImageBlock: {
         flex: 3,
-        backgroundColor: "green"
+        backgroundColor: "#808080"
     },
     ScrollView: {
         width: width,
